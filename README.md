@@ -33,3 +33,32 @@ dbutils = dbutils_configurator \
 
 theSecret = dbutils.secrets.get("ssc-secrets", "ssc-app-key")
 ```
+
+## dbutils_configurator_ec
+
+This does the same thing, but uses the execution context API rather than uploading a notebook.
+This version does not require passing in a userId, and also doesn't require a scope/key for testing.
+Much simpler usage, but it does depend on Databricks API v1.2.  Also, it does not rely on databricks-api package.
+
+An Example:
+
+```python
+from pyspark.sql import SparkSession
+import dbutils_configurator_ec
+
+spark = SparkSession \
+    .builder \
+    .appName("db-connect-test") \
+    .config("spark.metrics.namespace", "db-connect-test") \
+    .getOrCreate()
+
+# This code is intended for use with databricks-connect, but can run on cluster too
+# for real usage, set forceReload=False (or omit it altogether, as it defaults to False)
+# default timeoutSeconds is 120 seconds
+dbutils = dbutils_configurator_ec.getConfiguredDbutils(spark,
+                                                       timeoutSeconds=30,
+                                                       forceReload=False)
+
+theSecret = dbutils.secrets.get("ssc-secrets", "ssc-app-key")
+```
+
