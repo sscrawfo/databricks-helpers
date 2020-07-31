@@ -1,6 +1,11 @@
 # databricks-helpers
 Misc Code for use in Databricks
 
+## create_pip_conf_initscript
+
+This is a Databricks notebook archive, with one primary cell.  It writes out an init-script which will reconfigure the default Pypi repository via the pip.conf file.  You simply need to update the index-url to point to the repo you want, run the code, then configure your cluster to run the init-script that is created.
+Subsequently, all python library installs will use the configured repo.
+
 ## dbutils_configurator
 
 dbutils_configurator.py provides a function for returning an instance of dbutils that will be properly configured for use of the secrets API regardless if run via databricks-connect, or on cluster.
