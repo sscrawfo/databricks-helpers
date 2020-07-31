@@ -19,7 +19,8 @@ echo "[global]" >> /root/.config/pip/pip.conf
 echo "timeout = 60" >> /root/.config/pip/pip.conf
 echo "index-url = https://nexus3.onap.org/repository/PyPi/simple" >> /root/.config/pip/pip.conf
 
-""",true)```
+""",true)
+```
 
 ## dbutils_configurator
 
