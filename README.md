@@ -4,7 +4,22 @@ Misc Code for use in Databricks
 ## create_pip_conf_initscript
 
 This is a Databricks notebook archive, with one primary cell.  It writes out an init-script which will reconfigure the default Pypi repository via the pip.conf file.  You simply need to update the index-url to point to the repo you want, run the code, then configure your cluster to run the init-script that is created.
-Subsequently, all python library installs will use the configured repo.
+Subsequently, all python library installs will use the configured repo.  Below is the code used to write the init-script:
+
+```%scala
+dbutils.fs.put("/databricks/scripts/config-pip.sh","""
+
+mkdir -p /root/.config/pip
+
+if [ ! -e /root/.config/pip/pip.conf ]; then
+    touch /root/.config/pip/pip.conf
+fi
+
+echo "[global]" >> /root/.config/pip/pip.conf
+echo "timeout = 60" >> /root/.config/pip/pip.conf
+echo "index-url = https://nexus3.onap.org/repository/PyPi/simple" >> /root/.config/pip/pip.conf
+
+""",true)```
 
 ## dbutils_configurator
 
