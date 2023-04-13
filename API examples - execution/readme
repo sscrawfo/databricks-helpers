@@ -1,0 +1,4 @@
+These are some examples of using Python to run code on a Databricks cluster, using different approaches:
+- The DB SQL connector (python client for Databricks SQL)
+- The Execution Context API for running PySpark Commands on an interactive (All-purpose) cluster
+- Using the Databricks-CLI package for convenience and calling the RunsSumbit API to run a notebook
